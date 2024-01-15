@@ -24,6 +24,7 @@ import scalismo.io.statisticalmodel.{NDArray, StatisticalModelIOUtils}
 import scalismo.mesh.*
 import scalismo.mesh.TriangleMesh.*
 import scalismo.utils.{MeshConversion, TetrahedralMeshConversion}
+import vtk.*
 
 import java.io.{BufferedReader, File, FileReader, IOException}
 import scala.reflect.ClassTag
@@ -358,7 +359,6 @@ object MeshIO {
   def writeMesh(mesh: TriangleMesh[_3D], file: File): Try[Unit] = {
     val filename = file.getAbsolutePath
     filename match {
-      case f if f.endsWith(".h5")  => writeHDF5(mesh, file)
       case f if f.endsWith(".vtk") => writeVTK(mesh, file)
       case f if f.endsWith(".stl") => writeSTL(mesh, file)
       case f if f.endsWith(".ply") => writePLY(Left(mesh), file)

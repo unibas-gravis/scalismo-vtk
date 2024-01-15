@@ -16,9 +16,12 @@
 
 package scalismo.vtk.io
 
+import niftijio.NiftiHeader
 import scalismo.common.Scalar
-import scalismo.utils.VtkHelpers
+import scalismo.io.FastReadOnlyNiftiVolume
+import scalismo.vtk.utils.VtkHelpers
 import spire.math.{UByte, UInt, UShort}
+import vtk.{vtkObjectBase, vtkStructuredPointsReader}
 
 import java.io.{File, IOException}
 import scala.reflect.ClassTag
@@ -28,6 +31,9 @@ import scala.util.{Failure, Try}
  * An enumeration comprising all the data types that we can read and write, in VTK and Nifti formats.
  */
 private[scalismo] object ScalarDataType extends Enumeration {
+
+  import NiftiHeader._
+  import VtkHelpers._
 
   import scala.language.implicitConversions
 

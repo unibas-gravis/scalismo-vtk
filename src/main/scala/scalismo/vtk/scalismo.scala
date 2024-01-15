@@ -1,4 +1,4 @@
-package scalismo
+package scalismo.vtk
 
 /*
  * Copyright 2015 University of Basel, Graphics and Vision Research Group
@@ -16,7 +16,8 @@ package scalismo
  * limitations under the License.
  */
 
-import scalismo.vtk.vtkObjectBase
+import ch.unibas.cs.gravis.vtkjavanativelibs.VtkNativeLibraries
+import vtk.vtkObjectBase
 
 import javax.swing.SwingUtilities
 
