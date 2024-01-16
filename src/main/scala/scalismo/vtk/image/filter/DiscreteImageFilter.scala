@@ -19,7 +19,7 @@ import scalismo.common.interpolation.{BSplineImageInterpolator, BSplineImageInte
 import scalismo.common.{Scalar, ScalarArray}
 import scalismo.geometry.*
 import scalismo.image.DiscreteImage
-import scalismo.utils.{CanConvertToVtk, ImageConversion}
+import scalismo.vtk.utils.{CanConvertToVtk, ImageConversion}
 import vtk.{vtkImageCast, vtkImageEuclideanDistance, vtkImageGaussianSmooth, vtkObjectBase}
 
 import scala.reflect.ClassTag

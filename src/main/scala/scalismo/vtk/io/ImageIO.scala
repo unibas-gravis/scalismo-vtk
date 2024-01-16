@@ -21,8 +21,9 @@ import scalismo.common.Scalar
 import scalismo.geometry.*
 import scalismo.image.{DiscreteImage, DiscreteImageDomain, StructuredPoints, StructuredPoints3D}
 import scalismo.io.ImageIO.readNifti
-import scalismo.utils.ImageConversion.{VtkAutomaticInterpolatorSelection, VtkInterpolationMode}
-import scalismo.utils.{CanConvertToVtk, ImageConversion}
+import scalismo.io.ScalarDataType
+import scalismo.vtk.utils.ImageConversion.{VtkAutomaticInterpolatorSelection, VtkInterpolationMode}
+import scalismo.vtk.utils.{CanConvertToVtk, ImageConversion}
 import spire.math.{UByte, UInt, UShort}
 import vtk.*
 
@@ -126,7 +127,7 @@ object ImageIO {
     }
 
     val result = (for {
-      fileScalarType <- ScalarDataType.ofFile(file)
+      fileScalarType <- ScalarDataTypeVTK.ofFile(file)
     } yield {
       val expectedScalarType = ScalarDataType.fromType[S]
       if (expectedScalarType == fileScalarType) {

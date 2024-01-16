@@ -15,8 +15,7 @@
  */
 package scalismo.vtk.utils
 
-import scalismo.common.{DiscreteField, PointId, PrimitiveScalarArray, Scalar, ScalarArray, UnstructuredPoints, ValueClassScalarArray}
-import scalismo.common
+import scalismo.common.{DiscreteField, PointId, PrimitiveScalarArray, Scalar, ScalarArray, ScalarMeshField3D, UnstructuredPoints, ValueClassScalarArray}
 import scalismo.common.DiscreteField.{ScalarMeshField, ScalarVolumeMeshField}
 import scalismo.common.interpolation.BSplineImageInterpolator3D
 import scalismo.geometry.{EuclideanVector, IntVector2D, IntVector3D, NDSpace, Point, _2D, _3D}
@@ -24,7 +23,8 @@ import scalismo.image.{DiscreteImage, DiscreteImageDomain, DiscreteImageDomain3D
 import scalismo.io.{ImageIO, ScalarDataType}
 import scalismo.mesh.{LineCell, LineList, LineMesh, TetrahedralCell, TetrahedralList, TetrahedralMesh, TetrahedralMesh3D, TriangleCell, TriangleList, TriangleMesh, TriangleMesh3D}
 import scalismo.utils.ArrayUtils
-import scalismo.utils.ImageConversion.{VtkAutomaticInterpolatorSelection, VtkCubicInterpolation, VtkInterpolationMode, VtkLinearInterpolation, VtkNearestNeighborInterpolation}
+import scalismo.utils.VtkHelpers.{VTK_CHAR, VTK_DOUBLE, VTK_FLOAT, VTK_INT, VTK_SHORT, VTK_SIGNED_CHAR, VTK_UNSIGNED_CHAR, VTK_UNSIGNED_INT, VTK_UNSIGNED_SHORT}
+import scalismo.vtk.utils.ImageConversion.{VtkAutomaticInterpolatorSelection, VtkCubicInterpolation, VtkInterpolationMode, VtkLinearInterpolation, VtkNearestNeighborInterpolation}
 import spire.math.{UByte, UInt, ULong, UShort}
 import vtk.{vtkCellArray, vtkCharArray, vtkDataArray, vtkDoubleArray, vtkFloatArray, vtkIdList, vtkImageCast, vtkImageData, vtkImageReslice, vtkImageToStructuredPoints, vtkInformation, vtkIntArray, vtkLandmarkTransform, vtkLine, vtkLongArray, vtkPointSet, vtkPoints, vtkPolyData, vtkShortArray, vtkSignedCharArray, vtkStructuredPoints, vtkTetra, vtkTriangle, vtkTriangleFilter, vtkUnsignedCharArray, vtkUnsignedIntArray, vtkUnsignedShortArray, vtkUnstructuredGrid}
 
@@ -32,19 +32,6 @@ import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
 
 object VtkHelpers {
-
-  val VTK_CHAR = 2
-  val VTK_SIGNED_CHAR = 15
-  val VTK_UNSIGNED_CHAR = 3
-  val VTK_SHORT = 4
-  val VTK_UNSIGNED_SHORT = 5
-  val VTK_INT = 6
-  val VTK_UNSIGNED_INT = 7
-  val VTK_LONG = 8
-  val VTK_UNSIGNED_LONG = 9
-  val VTK_FLOAT = 10
-  val VTK_DOUBLE = 11
-  val VTK_ID_TYPE = 12
 
   // ATTENTION: Writing out (signed) bytes using vtkCharArray seems to be broken in VTK, so we need to work around it.
   // We do this by writing the bytes into a vtkUnsignedCharArray first, then converting the scalar data.
@@ -361,7 +348,7 @@ object MeshConversion {
       scalarData <- VtkHelpers
         .vtkDataArrayToScalarArray[S](pd.GetPointData().GetScalars().GetDataType(), pd.GetPointData().GetScalars())
     } yield {
-      common.ScalarMeshField(mesh, scalarData)
+      ScalarMeshField3D(mesh, scalarData)
     }
   }
 
@@ -663,7 +650,7 @@ object ImageConversion {
     // we are likely dealing with a labelmap and should interpolate using Nearest Neighbor.
     // If the number of values is large, we are dealing with a normal image
     // and should use higher order interpolation schemes.
-    val selectedInterpolationMode = interpolationMode match {
+    val selectedInterpolationMode: VtkInterpolationMode = interpolationMode match {
       case VtkAutomaticInterpolatorSelection =>
         if (img.values.toSet.size <= 255) {
           ImageConversion.VtkNearestNeighborInterpolation

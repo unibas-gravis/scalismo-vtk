@@ -20,10 +20,11 @@ import scalismo.common.DiscreteField.{ScalarMeshField, ScalarVolumeMeshField}
 import scalismo.common.{PointId, Scalar, UnstructuredPoints}
 import scalismo.geometry.*
 import scalismo.hdf5json.HDFPath
+import scalismo.io.ScalarDataType
 import scalismo.io.statisticalmodel.{NDArray, StatisticalModelIOUtils}
 import scalismo.mesh.*
 import scalismo.mesh.TriangleMesh.*
-import scalismo.utils.{MeshConversion, TetrahedralMeshConversion}
+import scalismo.vtk.utils.{MeshConversion, TetrahedralMeshConversion}
 import vtk.*
 
 import java.io.{BufferedReader, File, FileReader, IOException}
