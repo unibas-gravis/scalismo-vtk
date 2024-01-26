@@ -15,18 +15,84 @@
  */
 package scalismo.vtk.utils
 
-import scalismo.common.{DiscreteField, PointId, PrimitiveScalarArray, Scalar, ScalarArray, ScalarMeshField3D, UnstructuredPoints, ValueClassScalarArray}
+import scalismo.common.{
+  DiscreteField,
+  PointId,
+  PrimitiveScalarArray,
+  Scalar,
+  ScalarArray,
+  ScalarMeshField3D,
+  UnstructuredPoints,
+  ValueClassScalarArray
+}
 import scalismo.common.DiscreteField.{ScalarMeshField, ScalarVolumeMeshField}
 import scalismo.common.interpolation.BSplineImageInterpolator3D
-import scalismo.geometry.{EuclideanVector, IntVector2D, IntVector3D, NDSpace, Point, _2D, _3D}
+import scalismo.geometry.{_2D, _3D, EuclideanVector, IntVector2D, IntVector3D, NDSpace, Point}
 import scalismo.image.{DiscreteImage, DiscreteImageDomain, DiscreteImageDomain3D, StructuredPoints}
 import scalismo.io.{ImageIO, ScalarDataType}
-import scalismo.mesh.{LineCell, LineList, LineMesh, TetrahedralCell, TetrahedralList, TetrahedralMesh, TetrahedralMesh3D, TriangleCell, TriangleList, TriangleMesh, TriangleMesh3D}
+import scalismo.mesh.{
+  LineCell,
+  LineList,
+  LineMesh,
+  TetrahedralCell,
+  TetrahedralList,
+  TetrahedralMesh,
+  TetrahedralMesh3D,
+  TriangleCell,
+  TriangleList,
+  TriangleMesh,
+  TriangleMesh3D
+}
 import scalismo.utils.ArrayUtils
-import scalismo.utils.VtkHelpers.{VTK_CHAR, VTK_DOUBLE, VTK_FLOAT, VTK_INT, VTK_SHORT, VTK_SIGNED_CHAR, VTK_UNSIGNED_CHAR, VTK_UNSIGNED_INT, VTK_UNSIGNED_SHORT}
-import scalismo.vtk.utils.ImageConversion.{VtkAutomaticInterpolatorSelection, VtkCubicInterpolation, VtkInterpolationMode, VtkLinearInterpolation, VtkNearestNeighborInterpolation}
+import scalismo.utils.VtkHelpers.{
+  VTK_CHAR,
+  VTK_DOUBLE,
+  VTK_FLOAT,
+  VTK_INT,
+  VTK_SHORT,
+  VTK_SIGNED_CHAR,
+  VTK_UNSIGNED_CHAR,
+  VTK_UNSIGNED_INT,
+  VTK_UNSIGNED_SHORT
+}
+import scalismo.vtk.utils.ImageConversion.{
+  VtkAutomaticInterpolatorSelection,
+  VtkCubicInterpolation,
+  VtkInterpolationMode,
+  VtkLinearInterpolation,
+  VtkNearestNeighborInterpolation
+}
 import spire.math.{UByte, UInt, ULong, UShort}
-import vtk.{vtkCellArray, vtkCharArray, vtkDataArray, vtkDoubleArray, vtkFloatArray, vtkIdList, vtkImageCast, vtkImageData, vtkImageReslice, vtkImageToStructuredPoints, vtkInformation, vtkIntArray, vtkLandmarkTransform, vtkLine, vtkLongArray, vtkPointSet, vtkPoints, vtkPolyData, vtkShortArray, vtkSignedCharArray, vtkStructuredPoints, vtkTetra, vtkTriangle, vtkTriangleFilter, vtkUnsignedCharArray, vtkUnsignedIntArray, vtkUnsignedShortArray, vtkUnstructuredGrid}
+import vtk.{
+  vtkCellArray,
+  vtkCharArray,
+  vtkDataArray,
+  vtkDoubleArray,
+  vtkFloatArray,
+  vtkIdList,
+  vtkImageCast,
+  vtkImageData,
+  vtkImageReslice,
+  vtkImageToStructuredPoints,
+  vtkInformation,
+  vtkIntArray,
+  vtkLandmarkTransform,
+  vtkLine,
+  vtkLongArray,
+  vtkPointSet,
+  vtkPoints,
+  vtkPolyData,
+  vtkShortArray,
+  vtkSignedCharArray,
+  vtkStructuredPoints,
+  vtkTetra,
+  vtkTriangle,
+  vtkTriangleFilter,
+  vtkUnsignedCharArray,
+  vtkUnsignedIntArray,
+  vtkUnsignedShortArray,
+  vtkUnstructuredGrid
+}
 
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}

@@ -16,7 +16,12 @@
 package scalismo.vtk.registration
 
 import breeze.linalg.DenseVector
-import scalismo.common.interpolation.{BSplineImageInterpolator, BSplineImageInterpolator2D, BSplineImageInterpolator3D, NearestNeighborInterpolator}
+import scalismo.common.interpolation.{
+  BSplineImageInterpolator,
+  BSplineImageInterpolator2D,
+  BSplineImageInterpolator3D,
+  NearestNeighborInterpolator
+}
 import scalismo.common.{EuclideanSpace2D, Field, PointId, RealSpace}
 import scalismo.geometry.*
 import scalismo.image.{DiscreteImageDomain2D, DiscreteImageDomain3D}

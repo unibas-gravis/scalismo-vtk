@@ -16,7 +16,7 @@
 package scalismo.vtk.io
 
 import breeze.linalg
-import breeze.linalg.{DenseMatrix, DenseVector, diag}
+import breeze.linalg.{diag, DenseMatrix, DenseVector}
 import scalismo.common.Scalar
 import scalismo.geometry.*
 import scalismo.image.{DiscreteImage, DiscreteImageDomain, StructuredPoints, StructuredPoints3D}
@@ -185,7 +185,6 @@ object ImageIO {
       case _ => Failure(new Exception("Unknown file type received" + file.getAbsolutePath))
     }
   }
-
 
   def writeVTK[D: NDSpace: CanConvertToVtk, S: Scalar: ClassTag](img: DiscreteImage[D, S],
                                                                  file: File,

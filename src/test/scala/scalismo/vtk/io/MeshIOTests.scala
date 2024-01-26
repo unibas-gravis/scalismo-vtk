@@ -17,7 +17,7 @@ package scalismo.vtk.io
 
 import scalismo.common.*
 import scalismo.common.DiscreteField.{ScalarMeshField, ScalarVolumeMeshField}
-import scalismo.geometry.{Point, _3D}
+import scalismo.geometry.{_3D, Point}
 import scalismo.mesh.*
 import scalismo.utils.Random
 import scalismo.vtk.ScalismoTestSuite
