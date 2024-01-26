@@ -1,5 +1,19 @@
+*.DS_Store
 *.class
+*~
+lib/libvtk*
 *.log
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.cache
+.classpath
+.history
+.project
+\#*\#
+/target
+/bin
+.settings
+/project/target
+/project/project
+/.idea/
+/*.iml
+null/
+.bloop
