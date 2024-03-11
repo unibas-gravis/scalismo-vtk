@@ -199,8 +199,6 @@ class RegistrationTests extends ScalismoTestSuite {
         LBFGSOptimizer(maxNumberOfIterations = 300)
       ).iterator(DenseVector.zeros[Double](transformationSpace.numberOfParameters))
       val regItPrinting = for (it <- regIt) yield {
-        println(it.value)
-        println(it.parameters)
         it
       }
 
