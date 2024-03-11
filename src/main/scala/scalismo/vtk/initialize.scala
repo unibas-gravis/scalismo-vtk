@@ -1,5 +1,4 @@
 package scalismo.vtk
-
 /*
  * Copyright 2015 University of Basel, Graphics and Vision Research Group
  *
@@ -21,7 +20,7 @@ import vtk.vtkObjectBase
 
 import javax.swing.SwingUtilities
 
-package object scalismo {
+package object initialize {
 
   // this is a hacky way to get an object that can be synchronized on, with a mutable value.
   private val initialized = Array.fill(1)(false)
@@ -35,7 +34,7 @@ package object scalismo {
    *   time interval (in milliseconds) for running the vtk garbage collection. A value <= 0 means that garbage
    *   collection is not run automatically.
    */
-  def initialize(ignoreErrors: Boolean = false, gcInterval: Long = 60 * 1000) = initialized.synchronized {
+  def setup(ignoreErrors: Boolean = false, gcInterval: Long = 60 * 1000) = initialized.synchronized {
     import java.io.File
     val nativeDir = new File(System.getProperty("user.home") + File.separator + ".scalismo")
     if (!initialized(0)) {
