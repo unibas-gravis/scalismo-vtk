@@ -20,7 +20,7 @@ import vtk.vtkObjectBase
 
 import javax.swing.SwingUtilities
 
-object Initialize {
+object initialize {
   // this is a hacky way to get an object that can be synchronized on, with a mutable value.
   private val initialized = Array.fill(1)(false)
 
