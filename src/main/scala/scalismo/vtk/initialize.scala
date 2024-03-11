@@ -1,4 +1,3 @@
-package scalismo.vtk
 /*
  * Copyright 2015 University of Basel, Graphics and Vision Research Group
  *
@@ -14,14 +13,14 @@ package scalismo.vtk
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package scalismo.vtk
 
 import ch.unibas.cs.gravis.vtkjavanativelibs.VtkNativeLibraries
 import vtk.vtkObjectBase
 
 import javax.swing.SwingUtilities
 
-package object initialize {
-
+object Initialize {
   // this is a hacky way to get an object that can be synchronized on, with a mutable value.
   private val initialized = Array.fill(1)(false)
 
@@ -34,7 +33,7 @@ package object initialize {
    *   time interval (in milliseconds) for running the vtk garbage collection. A value <= 0 means that garbage
    *   collection is not run automatically.
    */
-  def setup(ignoreErrors: Boolean = false, gcInterval: Long = 60 * 1000) = initialized.synchronized {
+  def apply(ignoreErrors: Boolean = false, gcInterval: Long = 60 * 1000) = initialized.synchronized {
     import java.io.File
     val nativeDir = new File(System.getProperty("user.home") + File.separator + ".scalismo")
     if (!initialized(0)) {
@@ -45,7 +44,6 @@ package object initialize {
       }
       initialized(0) = true
     }
-
   }
 
   private def setupVTKGCThread(gcInterval: Long): Unit = {
@@ -71,5 +69,4 @@ package object initialize {
     gcThread.setDaemon(true)
     gcThread.start()
   }
-
 }

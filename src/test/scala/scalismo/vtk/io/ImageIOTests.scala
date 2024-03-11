@@ -79,8 +79,6 @@ class ImageIOTests extends ScalismoTestSuite {
         case Success(img) =>
           val doubles = img.data.map(v => implicitly[Scalar[T]].toDouble(v)).iterator.toArray
           (doubles.length, doubles.min, doubles.max) should equal((8, 42.0, 49.0))
-        // println("vtk " + typeOf[T] + " " + dim+ " " + img.data.getClass + " " + img.data.deep)
-
       }
       read should be a Symbol("Success")
 
@@ -95,7 +93,6 @@ class ImageIOTests extends ScalismoTestSuite {
         case Success(img) =>
           val doubles = img.data.map(v => implicitly[Scalar[T]].toDouble(v)).iterator.toArray
           (doubles.length, doubles.min, doubles.max) should equal((8, 42.0, 49.0))
-        // println("vtk " + typeOf[T] + " " + dim+ " " + img.data.getClass + " " + img.data.deep)
       }
       reread should be a Symbol("Success")
       vtk.delete()
@@ -111,7 +108,6 @@ class ImageIOTests extends ScalismoTestSuite {
           case Success(img) =>
             val doubles = img.data.map(v => implicitly[Scalar[T]].toDouble(v)).iterator.toArray
             (doubles.length, doubles.min, doubles.max) should equal((8, 42.0, 49.0))
-          // println("nii " + typeOf[T] + " " + dim+ " " + img.data.getClass + " " + img.data.deep)
         }
         nii.delete()
       }
